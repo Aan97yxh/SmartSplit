@@ -43,7 +43,7 @@ fun SmartSplitTopBar(title: String, onBack: () -> Unit) {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor         = MaterialTheme.colorScheme.primary, // Reaktif mengikuti tema
+            containerColor         = MaterialTheme.colorScheme.primary,
             titleContentColor      = Color.White,
             navigationIconContentColor = Color.White
         )
@@ -65,14 +65,13 @@ fun PrimaryButton(
         enabled  = enabled && !isLoading,
         modifier = modifier.fillMaxWidth().height(52.dp),
         shape    = RoundedCornerShape(14.dp),
-        // Sentuhan Premium: Menambahkan drop shadow agar tidak flat kaku
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 3.dp,
             pressedElevation = 6.dp,
             disabledElevation = 0.dp
         ),
         colors   = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary, // Adaptif siang/malam
+            containerColor = MaterialTheme.colorScheme.primary,
             contentColor = Color.White
         )
     ) {
@@ -222,7 +221,7 @@ fun AuthTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    placeholder: @Composable (() -> Unit)? = null, // 🟢 LANGKAH 1: Slot pintu placeholder dibuka di sini!
+    placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: androidx.compose.ui.text.input.VisualTransformation =
@@ -236,13 +235,13 @@ fun AuthTextField(
             text = label,
             style    = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onBackground // Kontras tulisan label fix
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.height(6.dp))
         OutlinedTextField(
             value                = value,
             onValueChange        = onValueChange,
-            placeholder          = placeholder, // 🟢 LANGKAH 2: Dilempar masuk ke bodi text field
+            placeholder          = placeholder,
             leadingIcon          = leadingIcon,
             trailingIcon         = trailingIcon,
             visualTransformation = visualTransformation,
@@ -252,9 +251,9 @@ fun AuthTextField(
             singleLine  = true,
             isError     = errorText.isNotEmpty(),
             modifier    = Modifier.fillMaxWidth(),
-            shape       = RoundedCornerShape(14.dp), // Kelengkungan sudut form disamakan dengan tombol
+            shape       = RoundedCornerShape(14.dp),
             colors      = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor   = MaterialTheme.colorScheme.primary, // Fix border warna reaktif
+                focusedBorderColor   = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline
             )
         )
