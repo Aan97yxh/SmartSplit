@@ -30,6 +30,7 @@ import com.smartsplit.app.ui.components.AuthTextField
 import com.smartsplit.app.ui.components.PrimaryButton
 import com.smartsplit.app.util.IndonesianStrings
 import com.smartsplit.app.util.LocalStrings
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -39,6 +40,7 @@ fun LoginScreen(
 ) {
     val strings      = LocalStrings.current
     val context      = LocalContext.current
+    val scope        = rememberCoroutineScope()
     var email        by remember { mutableStateOf("") }
     var password     by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
@@ -71,7 +73,7 @@ fun LoginScreen(
 
             Box(
                 modifier         = Modifier.size(72.dp).clip(RoundedCornerShape(18.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer), // Memakai warna container reaktif
+                    .background(MaterialTheme.colorScheme.primaryContainer),
                 contentAlignment = Alignment.Center
             ) {
                 Text("SS", color = MaterialTheme.colorScheme.primary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
@@ -131,7 +133,6 @@ fun LoginScreen(
             ) {
                 TextButton(
                     onClick = {
-                        // 🟢 Berikan aksi Toast agar tombol terasa hidup saat diklik
                         Toast.makeText(
                             context,
                             if (strings == IndonesianStrings)
@@ -144,7 +145,7 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = strings.forgotPassword,
-                        color = MaterialTheme.colorScheme.primary, // 🟢 Fix agar warnanya menyala di Dark Mode
+                        color = MaterialTheme.colorScheme.primary,
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Medium
                     )
@@ -159,18 +160,22 @@ fun LoginScreen(
                 onClick   = {
                     if (validate()) {
                         isLoading = true
-                        val success = viewModel.login(email.trim(), password)
-                        isLoading = false
-                        if (success) onLoginSuccess()
-                        else passError = if (strings == IndonesianStrings)
-                            "Email atau kata sandi salah" else "Wrong email or password"
+                        scope.launch {
+                            val success = viewModel.login(email.trim(), password)
+                            isLoading = false
+                            if (success) {
+                                onLoginSuccess()
+                            } else {
+                                passError = if (strings == IndonesianStrings)
+                                    "Email atau kata sandi salah" else "Wrong email or password"
+                            }
+                        }
                     }
                 }
             )
 
             Spacer(Modifier.height(24.dp))
 
-            // 3. FIX WARNA LINK STRINGS DENGAN ATURAN REAKTIF & UNDERLINE BIAR JELAS BISA DI-KLIK
             TextButton(onClick = onNavigateToRegister) {
                 Text(buildAnnotatedString {
                     withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f))) {

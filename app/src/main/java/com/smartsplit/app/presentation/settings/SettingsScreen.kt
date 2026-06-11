@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +29,11 @@ import com.smartsplit.app.presentation.settings.SettingsViewModel
 import com.smartsplit.app.ui.components.ConfirmDialog
 import com.smartsplit.app.ui.components.SmartSplitTopBar
 import com.smartsplit.app.util.LocalStrings
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.core.app.NotificationManagerCompat
+
 
 @Composable
 fun SettingsScreen(
@@ -38,13 +44,29 @@ fun SettingsScreen(
     onBack: () -> Unit
 ) {
     val strings              = LocalStrings.current
+    val context              = LocalContext.current
     val isDarkMode           by settingsViewModel.isDarkMode.collectAsState()
     val language             by settingsViewModel.language.collectAsState()
     val notificationsEnabled by settingsViewModel.notificationsEnabled.collectAsState()
     val user                 by authViewModel.user.collectAsState()
 
-    var showLogoutDialog   by remember { mutableStateOf(false) }
     var showLanguagePicker by remember { mutableStateOf(false) }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                val isSystemEnabled = NotificationManagerCompat.from(context).areNotificationsEnabled()
+                settingsViewModel.syncNotificationStatus(isSystemEnabled)
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    var showLogoutDialog   by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar         = { SmartSplitTopBar(title = strings.settings, onBack = onBack) },
@@ -131,7 +153,13 @@ fun SettingsScreen(
                     icon          = Icons.Default.Notifications,
                     label         = strings.notifications,
                     checked       = notificationsEnabled,
-                    onToggle      = { settingsViewModel.toggleNotifications() },
+                    onToggle      = {
+                        settingsViewModel.toggleNotifications()
+                        val intent = android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                            putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, context.packageName)
+                        }
+                        context.startActivity(intent)
+                    },
                     checkedIcon   = Icons.Default.Notifications,
                     uncheckedIcon = Icons.Default.NotificationsOff
                 )

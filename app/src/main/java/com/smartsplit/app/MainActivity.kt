@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,6 +35,11 @@ import com.smartsplit.app.util.IndonesianStrings
 import com.smartsplit.app.util.LocalStrings
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +51,23 @@ class MainActivity : ComponentActivity() {
         // Notification channel
         NotificationHelper.createChannel(this)
 
+        // Notification
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1001
+                )
+            }
+        }
+        // Trigger notif saat pertama kali dibuka (demo)
+        WorkManager.getInstance(this).cancelUniqueWork("SmartSplitBillReminder")
+
         // Notification Bill
         val reminderRequest = PeriodicWorkRequestBuilder<BillReminderWorker>(
-            24, TimeUnit.HOURS
+            15, TimeUnit.MINUTES
         ).build()
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             "SmartSplitBillReminder",
@@ -54,16 +75,13 @@ class MainActivity : ComponentActivity() {
             reminderRequest
         )
 
-        // 📦 1. Inisialisasi Sumber Data Dasar
         val prefs = AppPreferences(this)
         val db    = AppDatabase.getInstance(this)
 
-        // 🔄 2. Bungkus Sumber Data ke dalam Implementasi Repositori Baru
-        val userRepository     = UserRepositoryImpl(prefs)
+        val userRepository     = UserRepositoryImpl(prefs, db.userDao())
         val billRepository     = BillRepositoryImpl(db.billDao())
         val currencyRepository = CurrencyRepositoryImpl(RetrofitClient.instance)
 
-        // 🏗️ 3. Suntikkan Repositori Baru ke dalam Factory Layer Presentation
         val authFactory     = AuthViewModelFactory(userRepository)
         val billFactory     = BillViewModelFactory(billRepository, currencyRepository)
         val homeFactory     = HomeViewModelFactory(billRepository)
@@ -72,8 +90,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            // Mengambil ViewModel dari Package Presentation yang Baru
-            val authVm: AuthViewModel       = viewModel(factory = authFactory)
+            val authVm: AuthViewModel         = viewModel(factory = authFactory)
             val settingsVm: SettingsViewModel = viewModel(factory = settingsFactory)
 
             val isDarkMode by settingsVm.isDarkMode.collectAsState()
@@ -83,12 +100,19 @@ class MainActivity : ComponentActivity() {
 
             SmartSplitTheme(darkTheme = isDarkMode) {
                 CompositionLocalProvider(LocalStrings provides strings) {
-                    SmartSplitNavGraph(
-                        authViewModel     = authVm,
-                        billFactory       = billFactory,
-                        homeFactory       = homeFactory,
-                        settingsViewModel = settingsVm
-                    )
+                    androidx.compose.material3.Surface(
+                        modifier = androidx.compose.ui.Modifier
+                            .fillMaxSize()
+                            .navigationBarsPadding(),
+                        color = androidx.compose.material3.MaterialTheme.colorScheme.background
+                    ) {
+                        SmartSplitNavGraph(
+                            authViewModel = authVm,
+                            billFactory = billFactory,
+                            homeFactory = homeFactory,
+                            settingsViewModel = settingsVm
+                        )
+                    }
                 }
             }
         }

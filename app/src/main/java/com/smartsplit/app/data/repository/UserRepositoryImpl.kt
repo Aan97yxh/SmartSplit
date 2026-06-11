@@ -1,9 +1,15 @@
 package com.smartsplit.app.data.repository
 
+import com.smartsplit.app.data.local.dao.UserDao
 import com.smartsplit.app.data.preferences.AppPreferences
+import com.smartsplit.app.domain.model.User
 import com.smartsplit.app.domain.repository.UserRepository
 
-class UserRepositoryImpl(private val prefs: AppPreferences) : UserRepository {
+class UserRepositoryImpl(
+    private val prefs: AppPreferences,
+    private val userDao: UserDao
+) : UserRepository {
+
     override var isLoggedIn: Boolean
         get() = prefs.isLoggedIn
         set(value) { prefs.isLoggedIn = value }
@@ -20,10 +26,6 @@ class UserRepositoryImpl(private val prefs: AppPreferences) : UserRepository {
         get() = prefs.userEmail
         set(value) { prefs.userEmail = value }
 
-    override var userPassword: String
-        get() = prefs.userPassword
-        set(value) { prefs.userPassword = value }
-
     override var userPhotoUri: String?
         get() = prefs.userPhotoUri
         set(value) { prefs.userPhotoUri = value }
@@ -39,4 +41,12 @@ class UserRepositoryImpl(private val prefs: AppPreferences) : UserRepository {
     override var notificationsEnabled: Boolean
         get() = prefs.notificationsEnabled
         set(value) { prefs.notificationsEnabled = value }
+
+    override suspend fun registerUser(user: User) {
+        userDao.insertUser(user)
+    }
+
+    override suspend fun getUserByEmail(email: String): User? {
+        return userDao.getUserByEmail(email)
+    }
 }

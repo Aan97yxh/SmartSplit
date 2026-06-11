@@ -10,6 +10,10 @@ class BillRepositoryImpl(private val dao: BillDao) : BillRepository {
         return dao.getBillsByUser(userEmail)
     }
 
+    override suspend fun getBillsByUserOnce(userEmail: String): List<Bill> {
+        return dao.getBillsByUserOnce(userEmail)
+    }
+
     override suspend fun addBill(bill: Bill) {
         dao.insertBill(bill)
     }

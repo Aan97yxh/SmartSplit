@@ -26,6 +26,7 @@ import com.smartsplit.app.presentation.auth.AuthViewModel
 import com.smartsplit.app.ui.components.AuthTextField
 import com.smartsplit.app.ui.components.PrimaryButton
 import com.smartsplit.app.util.LocalStrings
+import kotlinx.coroutines.launch
 
 @Composable
 fun RegisterScreen(
@@ -34,6 +35,7 @@ fun RegisterScreen(
     onNavigateToLogin: () -> Unit
 ) {
     val strings         = LocalStrings.current
+    val scope           = rememberCoroutineScope()
     var fullName        by remember { mutableStateOf("") }
     var email           by remember { mutableStateOf("") }
     var password        by remember { mutableStateOf("") }
@@ -151,8 +153,10 @@ fun RegisterScreen(
 
             PrimaryButton(text = strings.register, onClick = {
                 if (validate()) {
-                    val success = viewModel.register(fullName.trim(), email.trim(), password)
-                    if (success) onRegisterSuccess()
+                    scope.launch {
+                        val success = viewModel.register(fullName.trim(), email.trim(), password)
+                        if (success) onRegisterSuccess()
+                    }
                 }
             })
 

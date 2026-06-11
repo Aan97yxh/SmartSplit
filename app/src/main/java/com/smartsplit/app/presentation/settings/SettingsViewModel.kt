@@ -46,4 +46,12 @@ class SettingsViewModel(
         notificationsUseCase.setNotificationsEnabled(new)
         Timber.d("Notifications: $new")
     }
+
+    fun syncNotificationStatus(isEnabledInSystem: Boolean) {
+        if (_notificationsEnabled.value != isEnabledInSystem) {
+            _notificationsEnabled.value = isEnabledInSystem
+            notificationsUseCase.setNotificationsEnabled(isEnabledInSystem)
+            Timber.d("Notifications synced with OS: $isEnabledInSystem")
+        }
+    }
 }

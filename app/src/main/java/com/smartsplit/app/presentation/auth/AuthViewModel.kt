@@ -29,7 +29,7 @@ class AuthViewModel(
     private val _user = MutableStateFlow(getUserProfileUseCase())
     val user: StateFlow<UserProfile> = _user.asStateFlow()
 
-    fun login(email: String, password: String): Boolean {
+    suspend fun login(email: String, password: String): Boolean {
         val success = loginUseCase(email, password)
 
         if (success) {
@@ -42,7 +42,7 @@ class AuthViewModel(
         return success
     }
 
-    fun register(name: String, email: String, password: String): Boolean {
+    suspend fun register(name: String, email: String, password: String): Boolean {
         if (name.isBlank() || email.isBlank() || password.length < 6) return false
 
         registerUseCase(name, email, password)

@@ -21,9 +21,14 @@ class BillReminderWorker(
 
     override suspend fun doWork(): Result {
         try {
+            if (!prefs.notificationsEnabled) {
+                Timber.d("WorkManager: Notifikasi dinonaktifkan oleh pengguna di pengaturan. Melewati pengiriman.")
+                return Result.success()
+            }
+
             val userEmail = prefs.userEmail
             if (userEmail.isBlank()) return Result.failure()
-            val allBills = repository.getBillsByUser(userEmail).first()
+            val allBills = repository.getBillsByUserOnce(userEmail)
             val pendingBills = allBills.filter { !it.isFullySettled }
 
             if (pendingBills.isNotEmpty()) {

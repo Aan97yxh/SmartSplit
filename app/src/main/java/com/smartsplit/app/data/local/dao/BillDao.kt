@@ -9,6 +9,9 @@ interface BillDao {
     @Query("SELECT * FROM bills WHERE userEmail = :userEmail ORDER BY createdAt DESC")
     fun getBillsByUser(userEmail: String): Flow<List<Bill>>
 
+    @Query("SELECT * FROM bills WHERE userEmail = :userEmail ORDER BY createdAt DESC")
+    suspend fun getBillsByUserOnce(userEmail: String): List<Bill>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBill(bill: Bill)
 
