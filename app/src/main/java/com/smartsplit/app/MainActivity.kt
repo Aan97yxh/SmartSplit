@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
 
         // Notification Bill
         val reminderRequest = PeriodicWorkRequestBuilder<BillReminderWorker>(
-            15, TimeUnit.MINUTES
+            24, TimeUnit.HOURS
         ).build()
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             "SmartSplitBillReminder",
@@ -78,14 +78,15 @@ class MainActivity : ComponentActivity() {
         val prefs = AppPreferences(this)
         val db    = AppDatabase.getInstance(this)
 
+        // Dependency Injection Manual
         val userRepository     = UserRepositoryImpl(prefs, db.userDao())
         val billRepository     = BillRepositoryImpl(db.billDao())
         val currencyRepository = CurrencyRepositoryImpl(RetrofitClient.instance)
 
-        val authFactory     = AuthViewModelFactory(userRepository)
-        val billFactory     = BillViewModelFactory(billRepository, currencyRepository)
-        val homeFactory     = HomeViewModelFactory(billRepository)
-        val settingsFactory = SettingsViewModelFactory(userRepository)
+        val authFactory        = AuthViewModelFactory(userRepository)
+        val billFactory        = BillViewModelFactory(billRepository, currencyRepository)
+        val homeFactory        = HomeViewModelFactory(billRepository)
+        val settingsFactory    = SettingsViewModelFactory(userRepository)
 
         enableEdgeToEdge()
 

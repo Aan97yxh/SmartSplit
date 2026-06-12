@@ -25,11 +25,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 import com.smartsplit.app.presentation.auth.AuthViewModel
 import com.smartsplit.app.ui.components.AuthTextField
 import com.smartsplit.app.ui.components.PrimaryButton
 import com.smartsplit.app.util.IndonesianStrings
 import com.smartsplit.app.util.LocalStrings
+import com.smartsplit.app.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -71,13 +74,13 @@ fun LoginScreen(
         ) {
             Spacer(Modifier.height(72.dp))
 
-            Box(
-                modifier         = Modifier.size(72.dp).clip(RoundedCornerShape(18.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("SS", color = MaterialTheme.colorScheme.primary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
-            }
+            Image(
+                painter            = painterResource(id = R.drawable.logoapk2),
+                contentDescription = "Logo SmartSplit",
+                modifier           = Modifier
+                    .size(80.dp)
+                    .clip(RoundedCornerShape(24.dp))
+            )
 
             Spacer(Modifier.height(24.dp))
 

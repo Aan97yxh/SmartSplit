@@ -173,7 +173,7 @@ fun SettingsScreen(
                 SettingsClickRow(
                     icon    = Icons.Default.Info,
                     label   = strings.about,
-                    value   = "${strings.version} 1.0.0",
+                    value   = "${strings.version} 1.5.0",
                     onClick = {}
                 )
             }
