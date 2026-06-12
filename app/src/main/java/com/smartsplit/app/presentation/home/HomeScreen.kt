@@ -31,7 +31,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import com.smartsplit.app.presentation.home.HomeViewModel
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.smartsplit.app.util.AppStrings
 
 @Composable
@@ -67,7 +67,7 @@ fun HomeScreen(
     }
 
     val allBills     by viewModel.bills.collectAsState()
-    var searchQuery  by remember { mutableStateOf("") }
+    var searchQuery  by rememberSaveable { mutableStateOf("") }
 
     val filteredBills = remember(allBills, searchQuery) {
         if (searchQuery.isBlank()) allBills
