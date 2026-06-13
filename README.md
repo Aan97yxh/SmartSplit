@@ -11,11 +11,11 @@
 
 ---
 
-## 🚀 Fitur Utama
+##  Fitur Utama
 
 Aplikasi ini dilengkapi dengan fitur wajib serta fitur tambahan untuk meningkatkan pengalaman pengguna:
 
-### 📌 Fitur Wajib (Core Features)
+###  Fitur Wajib (Core Features)
 *   **Autentikasi Pengguna:** Sistem *Login* & *Register* multi-akun dilengkapi fitur *Auto-Login*.
 *   **Split Bill Berbasis Item (*Item-Based Split*):** Menentukan pesanan secara spesifik untuk tiap-tiap orang agar pembagian adil.
 *   **Kalkulator Otomatis:** Perhitungan *Tax* (Pajak) dan *Service Charge* langsung dihitung secara presisi.
@@ -24,14 +24,14 @@ Aplikasi ini dilengkapi dengan fitur wajib serta fitur tambahan untuk meningkatk
 *   **Pelacakan Pembayaran (*Payment Tracking*):** Memantau siapa saja anggota yang sudah membayar tagihan.
 *   **Sinkronisasi Lokal:** Penyimpanan data persisten yang aman menggunakan Room Database.
 
-### 🌟 Fitur Tambahan (Extra Features)
+###  Fitur Tambahan (Extra Features)
 *   **Jastip Mode (Jasa Titip):** Fitur untuk mengonversi mata uang asing secara otomatis menggunakan data kurs dari API.
 *   **Notifikasi Pengingat (*Reminder*):** Mengirimkan peringatan otomatis untuk tagihan yang belum diselesaikan.
 *   **Manajemen Profil:** Pengaturan informasi akun pengguna termasuk penyimpanan foto profil.
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+##  Teknologi yang Digunakan
 
 | Komponen | Teknologi & Library | Deskripsi |
 | :--- | :--- | :--- |
@@ -42,14 +42,14 @@ Aplikasi ini dilengkapi dengan fitur wajib serta fitur tambahan untuk meningkatk
 | **Serialization** | Kotlinx Serialization | Melakukan konversi data JSON ke objek Kotlin secara *type-safe*. |
 | **Background Task**| WorkManager | Menjalankan *background processing* untuk memicu sistem pengingat tagihan. |
 
-### 🌐 Integrasi API Eksternal
+###  Integrasi API Eksternal
 Fitur konversi mata uang pada **Jastip Mode** memanfaatkan **Frankfurter API** untuk mendapatkan nilai tukar secara *real-time*.
 *   **Endpoint:** `GET /latest`
 *   **Contoh Request:** `https://api.frankfurter.app/latest?from=USD&to=IDR`
 
 ---
 
-## 📂 Struktur Folder (Architecture & Package Structure)
+##  Struktur Folder (Architecture & Package Structure)
 
 Proyek ini menerapkan prinsip pemisahan kode berbasis Clean Architecture (`data`, `domain`, `presentation`):
 
@@ -88,7 +88,7 @@ app/src/main/java/com/smartsplit/app
 │   └── theme/            # Konfigurasi Tema Warna (Material 3), Tipografi, & Bentuk
 └── util/                 # Helper, Extension, dan kelas Utility umum
 ```
-## 🗄️ Skema Database (Room Entities)
+##  Skema Database (Room Entities)
 
 SmartSplit menggunakan **Room Database** untuk memastikan semua data transaksi tersimpan dengan aman di penyimpanan lokal secara *persistent*, sehingga aplikasi tetap dapat berfungsi penuh meskipun perangkat sedang *offline*.
 
@@ -127,11 +127,8 @@ Mencatat rekapitulasi transaksi yang telah diselesaikan untuk kebutuhan laporan 
 | `totalAmount` | Double | Total nominal akhir setelah pajak & servis |
 | `timestamp` | Long | Waktu transaksi berhasil dikunci/diselesaikan |
 
-> 💡 *Catatan:* Karena Room tidak mendukung penyimpanan tipe data objek kompleks secara langsung, kelas `Converter` digunakan di dalam paket `data/local/converter` untuk mengubah struktur data `List` menjadi format teks (`String` JSON) secara otomatis menggunakan *Kotlinx Serialization*.
-
 ---
-
-## ⏰ Notifikasi Pengingat (Background Task)
+## Notifikasi Pengingat (Background Task)
 
 Untuk menjamin tidak ada tagihan kelompok yang terlupakan, SmartSplit memanfaatkan dependensi **WorkManager** untuk menjalankan tugas di latar belakang (*background task*):
 
@@ -141,7 +138,7 @@ Untuk menjamin tidak ada tagihan kelompok yang terlupakan, SmartSplit memanfaatk
 
 ---
 
-## 💻 Cara Menjalankan Aplikasi
+##  Cara Menjalankan Aplikasi
 
 ### Prasyarat (Prerequisites)
 Sebelum melakukan proses kompilasi kode, pastikan sudah memenuhi spesifikasi berikut:
@@ -157,35 +154,69 @@ Sebelum melakukan proses kompilasi kode, pastikan sudah memenuhi spesifikasi ber
 2.  **Buka Proyek di Android Studio** Buka Android Studio, pilih menu **File > Open**, lalu arahkan ke folder hasil kloning `SmartSplit`.
 3.  **Sinkronisasi Gradle (Gradle Sync)** Biarkan Android Studio mengunduh semua dependensi eksternal yang dibutuhkan (seperti Room, Compose, Retrofit, dan WorkManager). Tunggu hingga proses selesai dengan status *Build Successful*.
 4.  **Jalankan Aplikasi** Sambungkan HP Android asli menggunakan kabel data (pastikan *USB Debugging* aktif) atau gunakan Emulator Android Studio. Klik tombol ikon **Run (Segitiga Hijau)** atau tekan kombinasi tombol `Shift + F10`.
-5.  **Memulai Sesi** Pada peluncuran pertama, masuklah ke halaman *Register* terlebih dahulu untuk membuat akun baru, lalu masuk via *Login Screen* untuk mulai menikmati fitur pelacakan tagihan.
+5.  **Memulai Sesi** Dimulai dengan masuk ke halaman *Register* terlebih dahulu untuk membuat akun baru, lalu masuk via *Login Screen* untuk memululai aplikasi
 
 ---
 
-## 📸 Dokumentasi / Screenshot Aplikasi
+##  Dokumentasi / Screenshot Aplikasi
 
 *Pratinjau tampilan antarmuka (User Interface) dari aplikasi SmartSplit:*
 
-| Login Screen | Dashboard Screen | Create Bill Screen |
+| SplashScreen (1) | SplashScreen (2) | OnBoarding (1) |
 | :---: | :---: | :---: |
-| <img src="[https://placehold.co/300x600/png?text=Login+Screen](https://placehold.co/300x600/png?text=Login+Screen)" width="180"> | <img src="[https://placehold.co/300x600/png?text=Dashboard+Screen](https://placehold.co/300x600/png?text=Dashboard+Screen)" width="180"> | <img src="[https://placehold.co/300x600/png?text=Create+Bill+Screen](https://placehold.co/300x600/png?text=Create+Bill+Screen)" width="180"> |
+|<img width="427" height="947" alt="1  SplashScreen (1)" src="https://github.com/user-attachments/assets/5ac7f00a-702a-4682-8c96-bf67b4368124" />|<img width="427" height="947" alt="1  SplashScreen (2)" src="https://github.com/user-attachments/assets/819975fc-a99e-4797-9842-9a8ac0ff71dc" />|<img width="427" height="947" alt="1  OnBoarding (1)" src="https://github.com/user-attachments/assets/c77e8de7-a946-49d7-8cc4-012c8a4d16cb" />| 
 
-| Bill Detail Screen | History Screen | Profile Screen |
+| OnBoarding (2) | OnBoarding (3) | Login (Light) |
 | :---: | :---: | :---: |
-| <img src="[https://placehold.co/300x600/png?text=Bill+Detail+Screen](https://placehold.co/300x600/png?text=Bill+Detail+Screen)" width="180"> | <img src="[https://placehold.co/300x600/png?text=History+Screen](https://placehold.co/300x600/png?text=History+Screen)" width="180"> | <img src="[https://placehold.co/300x600/png?text=Profile+Screen](https://placehold.co/300x600/png?text=Profile+Screen)" width="180"> |
+|<img width="420" height="942" alt="2  OnBoarding (2)" src="https://github.com/user-attachments/assets/7cb660f4-2757-4618-9da6-d9b8203be9f4" />|<img width="422" height="946" alt="2  OnBoarding (3)" src="https://github.com/user-attachments/assets/635b1b1f-149d-4feb-963b-b302d125e850" />|<img width="427" height="947" alt="1  Login (1)" src="https://github.com/user-attachments/assets/36d105ec-d508-40dd-bb5e-8036279e9e0b" />|
 
-> 💡 *Tips Pengembangan:* Kamu bisa mengganti atribut `src` pada tag gambar (`<img>`) di atas menggunakan tautan gambar screenshot asli proyekmu setelah diunggah ke GitHub Asset.
+| Login (Dark) | Register (Light) |  Register (Dark) |
+| :---: | :---: | :---: |
+|<img width="420" height="918" alt="3  Login (2)" src="https://github.com/user-attachments/assets/fcec4feb-f7b7-4ffb-89b2-2a84527db56e" />|<img width="425" height="943" alt="4  Register (1)" src="https://github.com/user-attachments/assets/d9433af3-801b-47f4-9e91-c2edb90d4224" />|<img width="416" height="907" alt="4  Register (2)" src="https://github.com/user-attachments/assets/44657c9a-be7d-438c-81f2-b0aa128cead4" />|
+
+| Home Empty (Light) | Home Empty (Dark) |  CreateBill (Light) |
+| :---: | :---: | :---: |
+|<img width="422" height="917" alt="5  Home (empty)" src="https://github.com/user-attachments/assets/fe6c348d-236c-47e1-84ce-dbfbfc3544ec" />|<img width="420" height="898" alt="5  Home (empty2)" src="https://github.com/user-attachments/assets/045000cb-4753-4e33-a97d-19ce98c63838" />|<img width="422" height="942" alt="6  CreateBill (1)" src="https://github.com/user-attachments/assets/ed8cec35-0326-4b2d-9e60-4eadbc6bc8e6" />|
+
+| CreateBill (Dark) | AddItems 1 (Light) |  AddItems 1 (Dark) |
+| :---: | :---: | :---: |
+|<img width="422" height="918" alt="6  CreateBill (2)" src="https://github.com/user-attachments/assets/89f8e489-3dd1-44eb-8160-4a4eca7cac92" />|<img width="425" height="946" alt="7  AddItems (1)" src="https://github.com/user-attachments/assets/d253db7f-97b9-435e-b4c5-f7362e8572e4" />|<img width="421" height="918" alt="7  AddItems (1dark)" src="https://github.com/user-attachments/assets/c0e7d14e-5a37-4587-ace0-7a4869618edd" />|
+
+| AddItems 2 (Light) | AddItems 2 (Dark) |  AddItems 3 (Light) |
+| :---: | :---: | :---: |
+|<img width="422" height="941" alt="7  AddItems (2)" src="https://github.com/user-attachments/assets/9f67578d-86f8-49b8-bdd4-09429b02e1f1" />|<img width="420" height="922" alt="7  AddItems (2dark)" src="https://github.com/user-attachments/assets/bc6601eb-17e9-483c-a17f-ef2d5383d5a8" />|<img width="425" height="945" alt="7  AddItems (3)" src="https://github.com/user-attachments/assets/f31942bf-ecda-49dd-9f1b-4a9cc24b0ab8" />|
+
+| AddItems 3 (Dark) | DeleteItems |  EditItems (Light) |
+| :---: | :---: | :---: |
+|<img width="422" height="917" alt="7  AddItems (3dark)" src="https://github.com/user-attachments/assets/f4da635f-ad6a-440b-94a2-48a738490a6c" />|<img width="420" height="942" alt="8  DeleteItems" src="https://github.com/user-attachments/assets/637584f2-70a1-468a-a265-d78bd6f86ece" />|<img width="422" height="943" alt="8  EditItems (1)" src="https://github.com/user-attachments/assets/a02c9cbc-4850-405a-93ba-229c77cb0435" />|
+
+| EditItems (Dark) | DetailScreen (Light) |  DetailScreen (Dark) |
+| :---: | :---: | :---: |
+|<img width="421" height="930" alt="8  EditItems (2)" src="https://github.com/user-attachments/assets/8a1116a3-9dc8-494a-861c-5891a4ccb79a" />|<img width="422" height="941" alt="9  DetailScreen (1)" src="https://github.com/user-attachments/assets/6ec7c665-67ec-4a79-bb5e-29afeb3ec2ef" />|<img width="420" height="922" alt="9  DetailScreen (2)" src="https://github.com/user-attachments/assets/cd10f7f0-db53-4666-8c80-81dd0526af59" />|
+
+| Share | Home (Light) |  Home (Dark) |
+| :---: | :---: | :---: |
+|<img width="421" height="936" alt="10  Share" src="https://github.com/user-attachments/assets/c7330d87-0fe4-4182-9b89-4f2ad86a80e6" />|<img width="422" height="942" alt="11  Home (1filled)" src="https://github.com/user-attachments/assets/f1f9e13c-86a6-4349-8fd2-d51c340b73d3" />|<img width="421" height="900" alt="11  Home (2filled)" src="https://github.com/user-attachments/assets/0eaf6b72-1f7b-4fd4-b937-a9e8df5aa6f2" />|
+
+| Settings (Light) | Settings (Dark) |  Profile (Light) |
+| :---: | :---: | :---: |
+|<img width="422" height="945" alt="12  Settings (1)" src="https://github.com/user-attachments/assets/639e55d7-6b70-4f22-9354-376796b8e4d8" />|<img width="422" height="917" alt="12  Settings (2)" src="https://github.com/user-attachments/assets/b06b3cca-92e4-4e66-a6ad-df5f42584d02" />|<img width="423" height="943" alt="13  Profile (1)" src="https://github.com/user-attachments/assets/933829d9-5a09-485c-9a81-7a09cceeb565" />|
+
+| Profile (Dark) | EditProfile (Light) |  EditProfile (Dark) |
+| :---: | :---: | :---: |
+|<img width="422" height="917" alt="13  Profile (2)" src="https://github.com/user-attachments/assets/9ec01575-25f4-4a74-9828-908fdc6caf65" />|<img width="423" height="947" alt="14  EditProfil (1)" src="https://github.com/user-attachments/assets/77d9cfad-847d-4cda-b9da-84898ba7e697" />|<img width="422" height="917" alt="14  EditProfil (2)" src="https://github.com/user-attachments/assets/522bfd6a-f9a6-4dda-911a-0b798dce8666" />|
 
 ---
 
-## 👥 Anggota Kelompok
+##  Anggota Kelompok
 
 Aplikasi ini dikembangkan secara kolaboratif oleh:
 
-* **M. Anshari** — 2410817310008.
-* **Rabiah Riska Amaliah** — 2410817320010.
+* **M. Anshari** (2410817310008)
+* **Rabiah Riska Amaliah** (2410817320010)
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
-Proyek ini dibangun, dikembangkan, dan dipublikasikan secara khusus untuk memenuhi tugas **Ujian Akhir Semester (UAS) Pemrograman Mobile**. Hak cipta penuh dari seluruh kode sumber ini dipegang oleh tim pengembang internal kelompok.
+Proyek ini dibangun, dikembangkan, dan dipublikasikan secara khusus untuk memenuhi **Ujian Akhir Semester (UAS) Pemrograman Mobile**. Hak cipta penuh dari seluruh kode sumber ini dipegang oleh tim pengembang internal kelompok.
