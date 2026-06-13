@@ -17,16 +17,17 @@ Aplikasi ini dilengkapi dengan fitur Utama serta fitur tambahan untuk meningkatk
 
 ###  Fitur Utama (Core Features)
 * **Autentikasi Pengguna** Sistem Login & Register multi-akun yang dilengkapi fitur Auto-Login untuk mempermudah akses pengguna.
+* **Create & Manage Bill** Pengguna dapat membuat transaksi/tagihan baru.
 * **Split Bill Berbasis Item (Item-Based Split)** Setiap item dapat dikaitkan langsung dengan peserta yang mengonsumsinya sehingga pembagian biaya lebih adil dan transparan.
 * **Kalkulasi Otomatis** Sistem secara otomatis menghitung subtotal, pajak (Tax), dan biaya layanan (Service Charge) untuk setiap peserta.
 * **Riwayat Transaksi** Menyimpan dan menampilkan daftar transaksi yang pernah dibuat sehingga dapat diakses kembali kapan saja.
-**Manajemen Item (Add, Edit, Delete)** Pengguna dapat menambah, mengubah, dan menghapus item sebelum transaksi difinalisasi.
+**Manajemen Transaksi (BREAD)** Pengguna dapat melihat riwayat transaksi, melihat detail tagihan, menambah tagihan baru, mengubah item, menghapus item/tagihan. 
 * **Pelacakan Pembayaran (Payment Tracking)**  Memantau status pembayaran setiap peserta dengan status Pending atau Settled.
 * **Detail Pembagian Tagihan** – Menampilkan rincian biaya per individu secara lengkap dan mudah dipahami.
 * **Penyimpanan Lokal (Room Database)** – Data pengguna dan transaksi disimpan secara persisten menggunakan Room Database sehingga tetap tersedia setelah aplikasi ditutup.
 
 ###  Fitur Tambahan (Extra Features)
-**Jastip Mode (Jasa Titip)** Mendukung konversi harga dari mata uang asing ke Rupiah secara otomatis menggunakan data kurs dari API. 
+* **Jastip Mode (Jasa Titip)** Mendukung konversi harga dari mata uang asing ke Rupiah secara otomatis menggunakan data kurs dari API. 
 * **Share Bill Result** Membagikan hasil pembagian tagihan kepada peserta lain secara cepat dan praktis.
 * **Notifikasi Pengingat (Reminder Notification)** Mengirimkan notifikasi otomatis untuk tagihan yang belum diselesaikan dalam 24 jam.
 * **Multi-Language Support** Mendukung Bahasa Indonesia dan Bahasa Inggris yang dapat diubah langsung melalui pengaturan aplikasi.
