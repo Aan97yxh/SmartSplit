@@ -13,22 +13,26 @@
 
 ##  Fitur Utama
 
-Aplikasi ini dilengkapi dengan fitur wajib serta fitur tambahan untuk meningkatkan pengalaman pengguna:
+Aplikasi ini dilengkapi dengan fitur Utama serta fitur tambahan untuk meningkatkan pengalaman pengguna:
 
-###  Fitur Wajib (Core Features)
-*   **Autentikasi Pengguna:** Sistem *Login* & *Register* multi-akun dilengkapi fitur *Auto-Login*.
-*   **Split Bill Berbasis Item (*Item-Based Split*):** Menentukan pesanan secara spesifik untuk tiap-tiap orang agar pembagian adil.
-*   **Kalkulator Otomatis:** Perhitungan *Tax* (Pajak) dan *Service Charge* langsung dihitung secara presisi.
-*   **Riwayat Transaksi:** Melihat transaksi lama.
-*   **Edit & Delete Item:** Dapat mengedit dan menghapus item sebelum melakukan validasi.
-*   **Pelacakan Pembayaran (*Payment Tracking*):** Memantau siapa saja anggota yang sudah membayar tagihan.
-*   **Sinkronisasi Lokal:** Penyimpanan data persisten yang aman menggunakan Room Database.
+###  Fitur Utama (Core Features)
+* **Autentikasi Pengguna** Sistem Login & Register multi-akun yang dilengkapi fitur Auto-Login untuk mempermudah akses pengguna.
+* **Split Bill Berbasis Item (Item-Based Split)** Setiap item dapat dikaitkan langsung dengan peserta yang mengonsumsinya sehingga pembagian biaya lebih adil dan transparan.
+* **Kalkulasi Otomatis** Sistem secara otomatis menghitung subtotal, pajak (Tax), dan biaya layanan (Service Charge) untuk setiap peserta.
+* **Riwayat Transaksi** Menyimpan dan menampilkan daftar transaksi yang pernah dibuat sehingga dapat diakses kembali kapan saja.
+**Manajemen Item (Add, Edit, Delete)** Pengguna dapat menambah, mengubah, dan menghapus item sebelum transaksi difinalisasi.
+* **Pelacakan Pembayaran (Payment Tracking)**  Memantau status pembayaran setiap peserta dengan status Pending atau Settled.
+* **Detail Pembagian Tagihan** – Menampilkan rincian biaya per individu secara lengkap dan mudah dipahami.
+* **Penyimpanan Lokal (Room Database)** – Data pengguna dan transaksi disimpan secara persisten menggunakan Room Database sehingga tetap tersedia setelah aplikasi ditutup.
 
 ###  Fitur Tambahan (Extra Features)
-*   **Jastip Mode (Jasa Titip):** Fitur untuk mengonversi mata uang asing secara otomatis menggunakan data kurs dari API.
-*   **Notifikasi Pengingat (*Reminder*):** Mengirimkan peringatan otomatis untuk tagihan yang belum diselesaikan.
-*   **Manajemen Profil:** Pengaturan informasi akun pengguna termasuk penyimpanan foto profil.
-
+**Jastip Mode (Jasa Titip)** Mendukung konversi harga dari mata uang asing ke Rupiah secara otomatis menggunakan data kurs dari API. 
+* **Share Bill Result** Membagikan hasil pembagian tagihan kepada peserta lain secara cepat dan praktis.
+* **Notifikasi Pengingat (Reminder Notification)** Mengirimkan notifikasi otomatis untuk tagihan yang belum diselesaikan dalam 24 jam.
+* **Multi-Language Support** Mendukung Bahasa Indonesia dan Bahasa Inggris yang dapat diubah langsung melalui pengaturan aplikasi.
+* **Dark Mode** Menyediakan tampilan mode gelap untuk meningkatkan kenyamanan penggunaan.
+* **Manajemen Profil** Pengguna dapat melihat dan mengubah informasi profil, termasuk foto profil.
+* **Onboarding Screen** Memberikan pengenalan singkat mengenai fitur dan alur penggunaan aplikasi bagi pengguna baru.
 ---
 
 ##  Teknologi yang Digunakan
