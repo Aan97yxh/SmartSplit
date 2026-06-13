@@ -154,7 +154,7 @@ Sebelum melakukan proses kompilasi kode, pastikan sudah memenuhi spesifikasi ber
 2.  **Buka Proyek di Android Studio** Buka Android Studio, pilih menu **File > Open**, lalu arahkan ke folder hasil kloning `SmartSplit`.
 3.  **Sinkronisasi Gradle (Gradle Sync)** Biarkan Android Studio mengunduh semua dependensi eksternal yang dibutuhkan (seperti Room, Compose, Retrofit, dan WorkManager). Tunggu hingga proses selesai dengan status *Build Successful*.
 4.  **Jalankan Aplikasi** Sambungkan HP Android asli menggunakan kabel data (pastikan *USB Debugging* aktif) atau gunakan Emulator Android Studio. Klik tombol ikon **Run (Segitiga Hijau)** atau tekan kombinasi tombol `Shift + F10`.
-5.  **Memulai Sesi** Dimulai dengan masuk ke halaman *Register* terlebih dahulu untuk membuat akun baru, lalu masuk via *Login Screen* untuk memululai aplikasi
+5.  **Memulai Sesi** Dimulai dengan ditampilkannya *SplashScreen* terlebih dahulu sebagai identitas aplikasi dan proses pengecekan awal. uJika pengguna telah login sebelumnya, sistem akan langsung mengarahkan ke halaman Home tanpa perlu melakukan login ulang.
 
 ---
 
