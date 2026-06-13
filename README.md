@@ -217,7 +217,7 @@ Sebelum melakukan proses kompilasi kode, pastikan sudah memenuhi spesifikasi ber
 
 Aplikasi ini dikembangkan secara kolaboratif oleh:
 
-* **M. Anshari** (2410817310008)
+* **M. Anshary** (2410817310008)
 * **Rabiah Riska Amaliah** (2410817320010)
 
 ---
