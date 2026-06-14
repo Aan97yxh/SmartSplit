@@ -21,7 +21,7 @@ Aplikasi ini dilengkapi dengan fitur Utama serta fitur tambahan untuk meningkatk
 * **Split Bill Berbasis Item (Item-Based Split)** Setiap item dapat dikaitkan langsung dengan peserta yang mengonsumsinya sehingga pembagian biaya lebih adil dan transparan.
 * **Kalkulasi Otomatis** Sistem secara otomatis menghitung subtotal, pajak (Tax), dan biaya layanan (Service Charge) untuk setiap peserta.
 * **Riwayat Transaksi** Menyimpan dan menampilkan daftar transaksi yang pernah dibuat sehingga dapat diakses kembali kapan saja.
-**Manajemen Transaksi (BREAD)** Pengguna dapat melihat riwayat transaksi, melihat detail tagihan, menambah tagihan baru, mengubah item, menghapus item/tagihan. 
+* **Manajemen Transaksi (BREAD)** Pengguna dapat melihat riwayat transaksi, melihat detail tagihan, menambah tagihan baru, mengubah item, menghapus item/tagihan. 
 * **Pelacakan Pembayaran (Payment Tracking)**  Memantau status pembayaran setiap peserta dengan status Pending atau Settled.
 * **Detail Pembagian Tagihan** – Menampilkan rincian biaya per individu secara lengkap dan mudah dipahami.
 * **Penyimpanan Lokal (Room Database)** – Data pengguna dan transaksi disimpan secara persisten menggunakan Room Database sehingga tetap tersedia setelah aplikasi ditutup.
@@ -104,7 +104,7 @@ Digunakan untuk mengelola data autentikasi dan profil pengguna.
 | Field | Tipe Data | Deskripsi |
 | :--- | :--- | :--- |
 | `email` (PK) | String | Email unik pengguna sebagai ID akun |
-| `nama` | String | Nama lengkap pengguna |
+| `name` | String | Nama lengkap pengguna |
 | `password` | String | Kredensial kata sandi akun |
 | `photoUri` | String? | URI lokasi file foto profil asli pengguna |
 
@@ -116,12 +116,12 @@ Menyimpan data utama dari setiap sesi pembagian tagihan kelompok.
 | `userEmail` | String | Email User |
 | `restaurantName` | String | Nama tempat atau restoran |
 | `date` | String | Tanggal transaksi |
-| `taxPercent` | Int | Persentase pajak yang dikenakan (Tax) |
-| `servicePercent`| Int | Persentase biaya layanan (Service Charge) |
+| `taxPercent` | Float | Persentase pajak yang dikenakan (Tax) |
+| `servicePercent`| Float | Persentase biaya layanan (Service Charge) |
 | `persons` | List\<String\> | Daftar anggota yang ikut serta dalam tagihan |
 | `items` | List\<BillItem\> | Daftar item/makanan yang dipesan |
 | `settledPersons` | Set<String> | Status pemantauan (Lunas / Belum Lunas) |
-| `paymentStatus` | Long | Waktu pembuatan tagihan dalam format timestamp.) |
+| `createdAt` | Long | Waktu pembuatan tagihan dalam format timestamp. |
 
 ### 3. Transaction History Entity
 Mencatat rekapitulasi transaksi yang telah diselesaikan untuk kebutuhan laporan atau arsip offline.
@@ -159,7 +159,7 @@ Sebelum melakukan proses kompilasi kode, pastikan sudah memenuhi spesifikasi ber
 2.  **Buka Proyek di Android Studio** Buka Android Studio, pilih menu **File > Open**, lalu arahkan ke folder hasil kloning `SmartSplit`.
 3.  **Sinkronisasi Gradle (Gradle Sync)** Biarkan Android Studio mengunduh semua dependensi eksternal yang dibutuhkan (seperti Room, Compose, Retrofit, dan WorkManager). Tunggu hingga proses selesai dengan status *Build Successful*.
 4.  **Jalankan Aplikasi** Sambungkan HP Android asli menggunakan kabel data (pastikan *USB Debugging* aktif) atau gunakan Emulator Android Studio. Klik tombol ikon **Run (Segitiga Hijau)** atau tekan kombinasi tombol `Shift + F10`.
-5.  **Memulai Sesi** Dimulai dengan ditampilkannya *SplashScreen* terlebih dahulu sebagai identitas aplikasi dan proses pengecekan awal. uJika pengguna telah login sebelumnya, sistem akan langsung mengarahkan ke halaman Home tanpa perlu melakukan login ulang.
+5.  **Memulai Sesi** Dimulai dengan ditampilkannya *SplashScreen* terlebih dahulu sebagai identitas aplikasi dan proses pengecekan awal. Jika pengguna telah login sebelumnya, sistem akan langsung mengarahkan ke halaman Home tanpa perlu melakukan login ulang.
 
 ---
 
