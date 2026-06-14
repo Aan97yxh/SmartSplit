@@ -215,4 +215,6 @@ Aplikasi ini dikembangkan secara kolaboratif oleh:
 
 ## Lisensi
 
-Proyek ini dibangun, dikembangkan, dan dipublikasikan secara khusus untuk memenuhi **Ujian Akhir Semester (UAS) Pemrograman Mobile**. Hak cipta penuh dari seluruh kode sumber ini dipegang oleh tim pengembang internal kelompok.
+Proyek ini dibangun secara kolaboratif khusus untuk memenuhi **Ujian Akhir Semester (UAS) Pemrograman Mobile**. 
+
+Kode sumber ini bersifat terbuka (*open-source*) untuk tujuan pembelajaran. Siapa pun dipersilakan untuk melakukan *clone*, mempelajari arsitektur kode, atau mengembangkan fitur-fitur di dalamnya lebih lanjut untuk kebutuhan edukasi.
