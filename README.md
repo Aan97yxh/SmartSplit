@@ -112,7 +112,7 @@ Digunakan untuk mengelola data autentikasi dan profil pengguna.
 Menyimpan data utama dari setiap sesi pembagian tagihan kelompok.
 | Field | Tipe Data | Deskripsi |
 | :--- | :--- | :--- |
-| `billId` (PK) | String | ID unik untuk setiap tagihan |
+| `id` (PK) | String | ID unik untuk setiap tagihan |
 | `userEmail` | String | Email User |
 | `restaurantName` | String | Nama tempat atau restoran |
 | `date` | String | Tanggal transaksi |
@@ -122,15 +122,6 @@ Menyimpan data utama dari setiap sesi pembagian tagihan kelompok.
 | `items` | List\<BillItem\> | Daftar item/makanan yang dipesan |
 | `settledPersons` | Set<String> | Status pemantauan (Lunas / Belum Lunas) |
 | `createdAt` | Long | Waktu pembuatan tagihan dalam format timestamp. |
-
-### 3. Transaction History Entity
-Mencatat rekapitulasi transaksi yang telah diselesaikan untuk kebutuhan laporan atau arsip offline.
-| Field | Tipe Data | Deskripsi |
-| :--- | :--- | :--- |
-| `historyId` (PK) | Long (Auto-generate) | ID unik rekam riwayat |
-| `billId` | Long | Foreign Key yang terhubung ke Bill Entity |
-| `totalAmount` | Double | Total nominal akhir setelah pajak & servis |
-| `timestamp` | Long | Waktu transaksi berhasil dikunci/diselesaikan |
 
 ---
 ## Notifikasi Pengingat (Background Task)
