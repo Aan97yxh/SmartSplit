@@ -16,17 +16,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smartsplit.app.R
-import com.smartsplit.app.ui.theme.Primary
+ import androidx.compose.animation.core.spring
+ import androidx.compose.animation.core.Spring
+ import androidx.compose.ui.draw.scale
 import kotlinx.coroutines.delay
 import androidx.compose.ui.layout.ContentScale
+
 
 @Composable
 fun SplashScreen(onFinished: () -> Unit) {
     var visible by remember { mutableStateOf(false) }
-    val alpha by animateFloatAsState(
-        targetValue   = if (visible) 1f else 0f,
-        animationSpec = tween(700),
-        label         = "splashAlpha"
+    val alpha by animateFloatAsState(targetValue = if (visible) 1f else 0f, animationSpec = tween(700), label = "alpha")
+
+    val scale by animateFloatAsState(
+        targetValue = if (visible) 1f else 0f,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioHighBouncy, stiffness = Spring.StiffnessMedium),
+        label = "bounceScale"
     )
 
     LaunchedEffect(Unit) {
@@ -40,7 +45,7 @@ fun SplashScreen(onFinished: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier            = Modifier.alpha(alpha),
+            modifier            = Modifier.alpha(alpha).scale(scale),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
